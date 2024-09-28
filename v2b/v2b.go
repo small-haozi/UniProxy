@@ -103,7 +103,6 @@ func GetServers() ([]ServerInfo, error) {
 		// return nil, errors.New("no servers")
 		defaultServerInfo := ServerInfo{
 			Id:      0,
-			SortId:  0,
 			Name:    "订阅套餐已到期",
 			Host:    "default_host",
 			Port:    0,
@@ -114,14 +113,12 @@ func GetServers() ([]ServerInfo, error) {
 			Flow:    "default_flow",
 			TlsSettings: struct {
 				ServerName    string `json:"serverName"`
-				ServerPort    string `json:"server_port"`
 				AllowInsecure string `json:"allowInsecure"`
 				RealityDest   string `json:"server_name"`
 				ShortId       string `json:"short_id"`
 				PublicKey     string `json:"public_key"`
 			}{
 				ServerName:    "default_server_name",
-				ServerPort:    "default_server_port",
 				AllowInsecure: "default_allow_insecure",
 				RealityDest:   "default_reality_dest",
 				ShortId:       "default_short_id",
@@ -138,12 +135,17 @@ func GetServers() ([]ServerInfo, error) {
 			},
 			CreatedAt:     nil,
 			AllowInsecure: 0,
+			Allow_Insecure: 0,
 			LastCheckAt:   nil,
 			Tags:          nil,
 			ServerName:    "default_server_name",
 			ServerKey:     "default_server_key",
 			UpMbps:        0,
 			DownMbps:      0,
+			HysteriaVersion: 2,
+			Hy2Obfs:       "default_obfs"
+			Hy2ObfsPassword: "default_obfs_password"
+			
 		}
 		return []ServerInfo{defaultServerInfo}, nil
 	}
