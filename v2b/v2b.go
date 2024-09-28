@@ -143,8 +143,8 @@ func GetServers() ([]ServerInfo, error) {
 			UpMbps:        0,
 			DownMbps:      0,
 			HysteriaVersion: 2,
-			Hy2Obfs:       "default_obfs"
-			Hy2ObfsPassword: "default_obfs_password"
+			Hy2Obfs:       "default_obfs",
+			Hy2ObfsPassword: "default_obfs_password",
 			
 		}
 		return []ServerInfo{defaultServerInfo}, nil
