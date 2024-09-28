@@ -100,52 +100,20 @@ func GetServers() ([]ServerInfo, error) {
 		return nil, err
 	}
 	if len(rsp.Data) == 0 {
-		// 定义一个默认的 ServerInfo
-		defaultServerInfo := ServerInfo{
-			Id:              0,
-			Name:            "默认节点",
-			Host:            "default_host",
-			Port:            8080,
-			Network:         "default_network",
-			Type:            "default_type",
-			Cipher:          "default_cipher",
-			Tls:             0,
-			Flow:            "default_flow",
-			TlsSettings: struct {
-				AllowInsecure string `json:"allow_insecure"`
-				Fingerprint    string `json:"fingerprint"`
-				PublicKey      string `json:"public_key"`
-				ServerName     string `json:"server_name"`
-				ShortId        string `json:"short_id"`
-			}{
-				AllowInsecure: "false",
-				Fingerprint:    "default_fingerprint",
-				PublicKey:      "default_public_key",
-				ServerName:     "default_server_name",
-				ShortId:        "default_short_id",
-			},
-			NetworkSettings: struct {
-				Path       string      `json:"path"`
-				Headers    interface{} `json:"headers"`
-				ServerName string      `json:"server_name"`
-			}{
-				Path:       "default_path",
-				Headers:    nil,
-				ServerName: "default_server_name",
-			},
-			CreatedAt:       0,
-			AllowInsecure:   0,
-			LastCheckAt:     nil,
-			Tags:            nil,
-			UpMbps:          0,
-			ServerName:      "default_server_name",
-			ServerKey:       "default_server_key",
-			DownMbps:        0,
-			HysteriaVersion: 2,
-			Hy2Obfs:         "default_obfs",
-			Hy2ObfsPassword: "default_obfs_password",
+		// 返回一个默认的节点
+		defaultServer := ServerInfo{
+			Id:          0,
+			Name:        "默认节点",
+			Host:        "default.host",
+			Port:        80,
+			Network:     "default",
+			Type:        "default",
+			Cipher:      "none",
+			Tls:         0,
+			Flow:        "default",
+			// 填充其他字段为默认值
 		}
-		return []ServerInfo{defaultServerInfo}, nil
+		return []ServerInfo{defaultServer}, nil
 	}
 	return rsp.Data, nil
 }
