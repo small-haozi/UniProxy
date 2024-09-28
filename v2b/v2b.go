@@ -51,7 +51,7 @@ type ServerInfo struct {
 	NetworkSettings struct {
 		Path       string      `json:"path"`
 		Headers    interface{} `json:"headers"`
-		ServerName string      `json:"serverName"`
+		ServerName string      `json:"server_name"`
 	} `json:"networkSettings"`
 	CreatedAt     interface{}         `json:"created_at"`
 	AllowInsecure int         `json:"insecure"`
