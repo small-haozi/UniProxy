@@ -55,7 +55,7 @@ type ServerInfo struct {
 		Headers    interface{} `json:"headers"`
 		ServerName string      `json:"serverName"`
 	} `json:"networkSettings"`
-	CreatedAt      interface{} `json:"created_at"`
+	CreatedAt      int	   `json:"created_at"`
 	AllowInsecure  int         `json:"insecure"`
 	Allow_Insecure int         `json:"allow_insecure"`
 	LastCheckAt    interface{} `json:"last_check_at"`
