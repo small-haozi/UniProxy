@@ -26,9 +26,7 @@ func ReverseProxy(c *gin.Context) {
 	target, err := url.Parse(u)
 	if err != nil {
 		log.WithField("err", err).Error("parse url failed")
-		c.JSON(400, Rsp{
-			Success: false,
-		})
+		return
 	}
 	proxy := httputil.NewSingleHostReverseProxy(target)
 	proxy.Director = func(req *http.Request) {
