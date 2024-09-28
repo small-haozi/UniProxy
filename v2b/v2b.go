@@ -2,7 +2,6 @@ package v2b
 
 import (
 	"encoding/json"
-	"errors"
 	"time"
 
 	"github.com/avast/retry-go/v4"
@@ -54,7 +53,7 @@ type ServerInfo struct {
 		Headers    interface{} `json:"headers"`
 		ServerName string      `json:"serverName"`
 	} `json:"networkSettings"`
-	CreatedAt     int         `json:"created_at"`
+	CreatedAt     interface{}         `json:"created_at"`
 	AllowInsecure int         `json:"insecure"`
 	Allow_Insecure int        `json:"allow_insecure"`
 	LastCheckAt   interface{} `json:"last_check_at"`
