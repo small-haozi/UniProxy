@@ -111,7 +111,7 @@ func GetServers() ([]ServerInfo, error) {
 			Tls:     0,
 			Flow:    "default_flow",
 			TlsSettings: struct {
-				ServerName    string `json:"serverName"`
+				ServerName    string `json:"server_name"`
 				AllowInsecure string `json:"allowInsecure"`
 				RealityDest   string `json:"server_name"`
 				ShortId       string `json:"short_id"`
