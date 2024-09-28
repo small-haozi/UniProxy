@@ -1,3 +1,20 @@
+package handle
+
+import (
+	"encoding/json"
+	"fmt"
+	"strings"
+	"time"
+
+	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
+	"github.com/wyx2685/UniProxy/v2b"
+)
+
+var servers map[string]*v2b.ServerInfo
+var orderservers []string
+var updateTime time.Time
+
 func GetServers(c *gin.Context) {
     // 检查缓存
     if len(servers) != 0 && time.Now().Before(updateTime) {
@@ -40,4 +57,23 @@ func GetServers(c *gin.Context) {
     // 返回服务器信息
     orderedJSON := buildOrderedJSON()
     c.Data(200, "application/json", []byte(orderedJSON))
+}
+
+func buildOrderedJSON() string {
+	var sb strings.Builder
+
+	sb.WriteString(`{"success": true, "data": {`)
+	for i, key := range orderservers {
+		server := servers[key]
+		serverJSON, err := json.Marshal(server)
+		if err != nil {
+			continue
+		}
+		sb.WriteString(fmt.Sprintf(`"%s": %s`, key, serverJSON))
+		if i < len(orderservers)-1 {
+			sb.WriteString(",")
+		}
+	}
+	sb.WriteString("}}")
+	return sb.String()
 }
