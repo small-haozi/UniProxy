@@ -116,17 +116,5 @@ func GetServers() ([]ServerInfo, error) {
 		}
 		return []ServerInfo{defaultServer}, nil
 	}
-
-	// 处理 CreatedAt 字段
-	for _, server := range rsp.Data {
-		if createdAt, ok := server.CreatedAt.(int); ok {
-			createdAtStr := strconv.Itoa(createdAt)
-			// 使用 createdAtStr 进行后续处理
-			_ = createdAtStr // 这里可以根据需要使用
-		} else {
-			return nil, errors.New("created_at is not an int")
-		}
-	}
-
 	return rsp.Data, nil
 }
