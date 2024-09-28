@@ -2,6 +2,8 @@ package v2b
 
 import (
 	"encoding/json"
+	"errors"
+	"strconv"
 	"time"
 
 	"github.com/avast/retry-go/v4"
@@ -32,40 +34,39 @@ type ServerFetchRsp struct {
 }
 
 type ServerInfo struct {
-	Id          int    `json:"id"`
-	Name        string `json:"name"`
-	Host        string `json:"host"`
-	Port        int    `json:"port"`
-	Network     string `json:"network"`
-	Type        string `json:"type"`
-	Cipher      string `json:"cipher"`
-	Tls         int    `json:"tls"`
-	Flow        string `json:"flow"`
-	TlsSettings struct {
+	Id             int         `json:"id"`
+	Name           string      `json:"name"`
+	Host           string      `json:"host"`
+	Port           int         `json:"port"`
+	Network        string      `json:"network"`
+	Type           string      `json:"type"`
+	Cipher         string      `json:"cipher"`
+	Tls            int         `json:"tls"`
+	Flow           string      `json:"flow"`
+	TlsSettings    struct {
 		AllowInsecure string `json:"allow_insecure"`
-		Fingerprint string `json:"fingerprint"`
+		Fingerprint   string `json:"fingerprint"`
 		PublicKey     string `json:"public_key"`
-		RealityDest   string `json:"serverName"`
 		ServerName    string `json:"server_name"`
 		ShortId       string `json:"short_id"`
 	} `json:"tls_settings"`
 	NetworkSettings struct {
 		Path       string      `json:"path"`
 		Headers    interface{} `json:"headers"`
-		ServerName string      `json:"server_name"`
+		ServerName string      `json:"serverName"`
 	} `json:"networkSettings"`
-	CreatedAt     interface{}         `json:"created_at"`
-	AllowInsecure int         `json:"insecure"`
-	Allow_Insecure int        `json:"allow_insecure"`
-	LastCheckAt   interface{} `json:"last_check_at"`
-	Tags          interface{} `json:"tags"`
+	CreatedAt      interface{} `json:"created_at"`
+	AllowInsecure  int         `json:"insecure"`
+	Allow_Insecure int         `json:"allow_insecure"`
+	LastCheckAt    interface{} `json:"last_check_at"`
+	Tags           interface{} `json:"tags"`
 	UpMbps        int         `json:"up_mbps"`
 	ServerName    string      `json:"server_name"`
 	ServerKey     string      `json:"server_key"`
 	DownMbps      int         `json:"down_mbps"`
-	HysteriaVersion int       `json:"version"`
+	HysteriaVersion int        `json:"version"`
 	Hy2Obfs       string      `json:"obfs"`
-	Hy2ObfsPassword string    `json:"obfs_password"`
+	Hy2ObfsPassword string     `json:"obfs_password"`
 }
 
 func GetServers() ([]ServerInfo, error) {
@@ -115,5 +116,17 @@ func GetServers() ([]ServerInfo, error) {
 		}
 		return []ServerInfo{defaultServer}, nil
 	}
+
+	// 处理 CreatedAt 字段
+	for i, server := range rsp.Data {
+		if createdAt, ok := server.CreatedAt.(int); ok {
+			createdAtStr := strconv.Itoa(createdAt)
+			// 使用 createdAtStr 进行后续处理
+			_ = createdAtStr // 这里可以根据需要使用
+		} else {
+			return nil, errors.New("created_at is not an int")
+		}
+	}
+
 	return rsp.Data, nil
 }
