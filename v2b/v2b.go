@@ -45,6 +45,7 @@ type ServerInfo struct {
 		AllowInsecure string `json:"allow_insecure"`
 		Fingerprint string `json:"fingerprint"`
 		PublicKey     string `json:"public_key"`
+		RealityDest   string `json:"serverName"`
 		ServerName    string `json:"server_name"`
 		ShortId       string `json:"short_id"`
 	} `json:"tls_settings"`
@@ -113,7 +114,7 @@ func GetServers() ([]ServerInfo, error) {
 			TlsSettings: struct {
 				ServerName    string `json:"server_name"`
 				AllowInsecure string `json:"allowInsecure"`
-				RealityDest   string `json:"server_name"`
+				RealityDest   string `json:"serverName"`
 				ShortId       string `json:"short_id"`
 				PublicKey     string `json:"public_key"`
 			}{
