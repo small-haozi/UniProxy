@@ -127,7 +127,7 @@ func GetServers() ([]ServerInfo, error) {
 			NetworkSettings: struct {
 				Path       string      `json:"path"`
 				Headers    interface{} `json:"headers"`
-				ServerName string      `json:"serverName"`
+				ServerName string      `json:"server_name"`
 			}{
 				Path:       "default_path",
 				Headers:    nil,
