@@ -118,7 +118,7 @@ func GetServers() ([]ServerInfo, error) {
 	}
 
 	// 处理 CreatedAt 字段
-	for i, server := range rsp.Data {
+	for _, server := range rsp.Data {
 		if createdAt, ok := server.CreatedAt.(int); ok {
 			createdAtStr := strconv.Itoa(createdAt)
 			// 使用 createdAtStr 进行后续处理
