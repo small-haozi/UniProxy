@@ -102,7 +102,7 @@ func GetServers() ([]ServerInfo, error) {
 		// 返回一个默认的节点
 		defaultServer := ServerInfo{
 			Id:          0,
-			Name:        "默认节点",
+			Name:        "购买后可用",
 			Host:        "default.host",
 			Port:        80,
 			Network:     "default",
