@@ -100,29 +100,29 @@ func GetServers() ([]ServerInfo, error) {
 		return nil, err
 	}
 	if len(rsp.Data) == 0 {
-		// return nil, errors.New("no servers")
+		// 定义一个默认的 ServerInfo
 		defaultServerInfo := ServerInfo{
-			Id:      0,
-			Name:    "订阅套餐已到期",
-			Host:    "default_host",
-			Port:    0,
-			Network: "default_network",
-			Type:    "default_type",
-			Cipher:  "default_cipher",
-			Tls:     0,
-			Flow:    "default_flow",
+			Id:              0,
+			Name:            "默认节点",
+			Host:            "default_host",
+			Port:            8080,
+			Network:         "default_network",
+			Type:            "default_type",
+			Cipher:          "default_cipher",
+			Tls:             0,
+			Flow:            "default_flow",
 			TlsSettings: struct {
-				ServerName    string `json:"server_name"`
-				AllowInsecure string `json:"allowInsecure"`
-				RealityDest   string `json:"serverName"`
-				ShortId       string `json:"short_id"`
-				PublicKey     string `json:"public_key"`
+				AllowInsecure string `json:"allow_insecure"`
+				Fingerprint    string `json:"fingerprint"`
+				PublicKey      string `json:"public_key"`
+				ServerName     string `json:"server_name"`
+				ShortId        string `json:"short_id"`
 			}{
-				ServerName:    "default_server_name",
-				AllowInsecure: "default_allow_insecure",
-				RealityDest:   "default_reality_dest",
-				ShortId:       "default_short_id",
-				PublicKey:     "default_public_key",
+				AllowInsecure: "false",
+				Fingerprint:    "default_fingerprint",
+				PublicKey:      "default_public_key",
+				ServerName:     "default_server_name",
+				ShortId:        "default_short_id",
 			},
 			NetworkSettings: struct {
 				Path       string      `json:"path"`
@@ -133,19 +133,17 @@ func GetServers() ([]ServerInfo, error) {
 				Headers:    nil,
 				ServerName: "default_server_name",
 			},
-			CreatedAt:     nil,
-			AllowInsecure: 0,
-			Allow_Insecure: 0,
-			LastCheckAt:   nil,
-			Tags:          nil,
-			ServerName:    "default_server_name",
-			ServerKey:     "default_server_key",
-			UpMbps:        0,
-			DownMbps:      0,
+			CreatedAt:       0,
+			AllowInsecure:   0,
+			LastCheckAt:     nil,
+			Tags:            nil,
+			UpMbps:          0,
+			ServerName:      "default_server_name",
+			ServerKey:       "default_server_key",
+			DownMbps:        0,
 			HysteriaVersion: 2,
-			Hy2Obfs:       "default_obfs",
+			Hy2Obfs:         "default_obfs",
 			Hy2ObfsPassword: "default_obfs_password",
-			
 		}
 		return []ServerInfo{defaultServerInfo}, nil
 	}
