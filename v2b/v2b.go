@@ -2,8 +2,6 @@ package v2b
 
 import (
 	"encoding/json"
-	"errors"
-	"strconv"
 	"time"
 
 	"github.com/avast/retry-go/v4"
