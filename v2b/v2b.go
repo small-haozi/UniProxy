@@ -100,7 +100,52 @@ func GetServers() ([]ServerInfo, error) {
 		return nil, err
 	}
 	if len(rsp.Data) == 0 {
-		return nil, errors.New("no servers")
+		// return nil, errors.New("no servers")
+		defaultServerInfo := ServerInfo{
+			Id:      0,
+			SortId:  0,
+			Name:    "订阅套餐已到期",
+			Host:    "default_host",
+			Port:    0,
+			Network: "default_network",
+			Type:    "default_type",
+			Cipher:  "default_cipher",
+			Tls:     0,
+			Flow:    "default_flow",
+			TlsSettings: struct {
+				ServerName    string `json:"serverName"`
+				ServerPort    string `json:"server_port"`
+				AllowInsecure string `json:"allowInsecure"`
+				RealityDest   string `json:"server_name"`
+				ShortId       string `json:"short_id"`
+				PublicKey     string `json:"public_key"`
+			}{
+				ServerName:    "default_server_name",
+				ServerPort:    "default_server_port",
+				AllowInsecure: "default_allow_insecure",
+				RealityDest:   "default_reality_dest",
+				ShortId:       "default_short_id",
+				PublicKey:     "default_public_key",
+			},
+			NetworkSettings: struct {
+				Path       string      `json:"path"`
+				Headers    interface{} `json:"headers"`
+				ServerName string      `json:"serverName"`
+			}{
+				Path:       "default_path",
+				Headers:    nil,
+				ServerName: "default_server_name",
+			},
+			CreatedAt:     nil,
+			AllowInsecure: 0,
+			LastCheckAt:   nil,
+			Tags:          nil,
+			ServerName:    "default_server_name",
+			ServerKey:     "default_server_key",
+			UpMbps:        0,
+			DownMbps:      0,
+		}
+		return []ServerInfo{defaultServerInfo}, nil
 	}
 	return rsp.Data, nil
 }
